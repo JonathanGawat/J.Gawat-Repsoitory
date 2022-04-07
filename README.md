@@ -48,7 +48,7 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 | Jump Box | Gateway  | 10.0.0.7   | Ubuntu           |
 | Web-1    | Web VM   | 10.0.0.8   | Ubuntu           |
 | Web-2    | Web VM   | 10.0.0.9   | Ubuntu           |
-| Project-VM ELK.     | 10.1.0.4   | Ubuntu           |                  
+| Project-VM ELK|     | 10.1.0.4   | Ubuntu           |                  
 
 ### Access Policies
 
