@@ -1,0 +1,103 @@
+ Archiving and Logging Data
+
+STEP 1: Create, Extract, Compress and Manage tar Backup Archives
+
+Command to extract the TarDocs.tar archive to the current directory:
+tar -C ~/Projects -xvf TarDocs.tar
+
+Command to create the ‘Javaless_Doc.tar’ archive from the ‘TarDocs/’ directory, while excluding the ‘TarDocs/Documents/Java/ directory
+sudo tar cvf Javaless_Doc.tar /var/log
+
+ Command to ensure ‘Java/’ is not in the new ’Javaless_Doc.tar’ archive
+tar tvvf Javaless_Docs.tar
+
+Bonus
+Command to create an incremental archive called ‘logs_backup.tar.gz’ with only changed files to ‘snapshot.file’ for the /var/log directory:
+tar cvvWf logs_backup.tar.gz  - -listed-incremental=logs_backup.snar  
+- -level=0 /var/log
+
+*Critical Analysis Question*
+     -Why wouldnt you use the options ‘-x’ and ‘-c’ at the same time with ‘tar’?
+-  ‘-x’ would be the option to copy where ‘-c’ would be the option to create. The functions would be useless together as you would want to extract the files before creating a tar file.
+
+STEP 2: Create, Manage and Automate Cron Jobs
+crontab -e
+0 6 * * 3 tar cvf ~/Projects/TarDocs/auth_backup.tar.gz ~/TarDocs
+0 6 * * 3 gzip -t auth_backup.tar.gz >> /var/log/auth_backup_validation.txt
+sudo ls -l /var/spool/croon/crontabs | grep sysadmin   crontab is running successfully 
+
+
+STEP 3: Write Basic Bash Scripts
+
+Using basic brace expansion, create the following four directories:
+mkdir backups ~/backups/{freemem,diskuse,openlist,freedisk}
+
+#!/bin/bash
+date
+echo “Backup Maintenence”
+echo -e “\nFreeMemory:”
+Free -h > ~/backups/freemem/free_mem.txt
+echo -e “\nDiskUsage:”
+ df -H | head -5 > ~/backups/diskusage/disk_usage.txt
+echo -e “\nOpenlist:”
+lsof > ~/backups/openlist/open_list.txt
+echo -e “\nFreedisk:”
+free > ~/backups/freedisk/free_disk.txt
+
+Bonus
+crontab -e scroll to bottom add : 0 6 * * 3 ~/system.sh      
+
+STEP 4: Manage Log File Sizes
+
+Config edits:
+
+#/var/log/auth.log “Log Management”
+/var/log/auth.log {
+weekly
+rotate notifempty
+delaycompress
+missingok
+endscript 
+}
+
+Bonus: Check for Policy and File Violations
+
+systemctl status auditd
+
+Within the sudo nano /etc/audit/auditd.conf command: 
+Changed num_logs 7
+Changed max_log_file 35
+
+Within sudo nano /etc/audit/rules.d/audit.rules
+-w /etc/shadow -p wa -k hashpass_audit
+-w /etc/passwd -p wa -k userpass_audit
+-w /var/log/auth.log -p wa -k authlog_audit
+
+Command to restart auditd 
+sudo auditctl restart auditd 
+
+Command to list all auditd rules
+sudo auditctl -l
+
+Command to produce an audit report
+aureport -au
+Created: sudo useradd attacker    
+ 	   sudo aureport -m 
+
+sudo nano /etc/audit/rules.d/audit.rules
+-
+
+sudo auditctl -l
+
+Bonus (Research Activity): Perform Various Log Filtering Techniques
+
+Write the journalctl command that performs a log search that returns all messages, with priorities from emergency to error, since the current system boot
+journalctl -p 0 -p 3
+
+Write the journalctl command that checks the disk usage of the system journal unit since the most recent boot.
+journalctl  - - disk-usage
+
+Write the journalctl command that removes all archived journal files except the most recent 2
+journalctl  - -vacuum-files=2
+
+
