@@ -61,8 +61,9 @@ Only the jump box/ansible machine can accept connections from the Internet. Acce
 
 Machines within the network can only be accessed by the jumpbox.
 -: Which machine did you allow to access your ELK VM? What was its IP address?_
-Jumpbox IP: 20.211.7.106 - public IP
-            10.0.0.7 - private IP
+Jumpbox IP: 
+20.211.7.106 - public IP
+10.0.0.7 - private IP
 
 A summary of the access policies in place can be found in the table below.
 
