@@ -70,8 +70,8 @@ A summary of the access policies in place can be found in the table below.
 |----------|---------------------|----------------------|
 | Jump Box | SSH port 22 - Yes   | 76.71.129.121        |
 | Web-1,2, | No                  |                      |
-| Red-Team-LB Port 80            | Front-end IP 20.70.172.186                     |
-| Project-VM ELK Kibana - 5601   | Front-end IP 20.70.172.186
+| Red-Team-LB Port 80|           | Front-end IP 20.70.172.186                     |
+| Project-VM ELK Kibana - 5601|  | Front-end IP 20.70.172.186
 
 
 ### Elk Configuration
