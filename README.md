@@ -8,7 +8,7 @@ https://drive.google.com/file/d/1r2ZL1f2hSGOthZL0ABX-Stnnk5zN3KC4/view?usp=shari
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the docker file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+  - _Enter the playbook file._
 /etc/ansible# install-elk.yml - for configuring the Elk VM with docker
 https://docs.google.com/document/d/17U_eoQ1oIVQUfedsKf1zBYeZJgWbObb3c1xlGJyLcME/edit?usp=sharing
 
@@ -27,16 +27,16 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+-: What aspect of security do load balancers protect? What is the advantage of a jump box?_
 Load balancers provides an access point for services used by multiple machines. They also contain their own firewall capabilities serving as increased security in addition to firewalls provided at the original point of access.
 A jump box is advantageous because it serves as an access point (or jump-into point) into a remote network. Due to the added features of having a jump-box includes access to private networks using more security measures like an SSH key and port allowing/disabling.
 
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the log files and system resources.
-- _TODO: What does Filebeat watch for?_
+-: What does Filebeat watch for?_
 Filebeat watches for system logs and changes to Elasticbeat 
 
-- _TODO: What does Metricbeat record?_
+-: What does Metricbeat record?_
 Metricbeat is used for gathering metrics and system resources in Elasticsearch
 
 
@@ -55,12 +55,12 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the jump box/ansible machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+-: Add whitelisted IP addresses_
 76.71.129.121
 
 
 Machines within the network can only be accessed by the jumpbox.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+-: Which machine did you allow to access your ELK VM? What was its IP address?_
 Jumpbox IP: 20.211.7.106 - public IP
             10.0.0.7 - private IP
 
@@ -77,11 +77,11 @@ A summary of the access policies in place can be found in the table below.
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+-: What is the main advantage of automating configuration with Ansible?_
 It saves time, reduces config errors and full automation of specific servers.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
+-: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
 - Install Docker - installs docker to the Virtual Networks
 - Install Python3_pip: allows additional modules to be installed
 - Docker Module: Tells PIP module to install docker components
@@ -90,27 +90,27 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
 https://drive.google.com/file/d/1oDsdaKpCoSCyj_hrzcHe5mqa_AKCudr-/view?usp=sharing
 
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+-: List the IP addresses of the machines you are monitoring_
 IP #1: 10.0.0.8 - Web-1
 IP #2: 10.0.0.9 - Web-2
 IP #3: 10.1.0.4 - Project-VM ELK
 
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+-: Specify which Beats you successfully installed_
 Filebeat and Metricbeat on:
 #1 Web-1: 10.0.0.8
 #2: Web-2: 10.0.0.9
 #3: Project-VM: 10.1.0.4
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+-: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
 
 - Filebeat collects login events to view current users logged on or who is actively logging in and out.
 - Metricbeat collects information such as memory and CPU usage to monitor systems to see if there are any processes using system resources 
@@ -124,7 +124,7 @@ SSH into the control node and follow the steps below:
 - Update the hosts file to include ELK 10.1.0.4 
 - Run the playbook, and navigate to http://10.1.0.4:5601/app/kibana to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
+_: Answer the following questions to fill in the blanks:_
 - _Which file is the playbook? Where do you copy it?_
 install-elk.yml is the playbook 
 Copied to /etc/ansible/roles/
@@ -172,9 +172,7 @@ My Script/YML file to download and run Filebeat
       name: filebeat
       enabled: yes
 
-
 My Script for downloading and running Metricbeat
-
 
 ---
 - name: installing and launching metricbeat
